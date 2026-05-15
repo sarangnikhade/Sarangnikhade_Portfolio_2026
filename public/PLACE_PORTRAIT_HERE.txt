@@ -1,0 +1,10 @@
+Drop your portrait photo here as: sarang.jpg
+
+Recommended:
+- Portrait orientation (3:4 aspect ratio works best)
+- At least 1200x1600px for crisp display on large screens
+- Color is fine — a grayscale filter is applied in CSS
+- Subject roughly centered horizontally; head in the upper third
+
+Path the code expects: /public/sarang.jpg
+After dropping the file in, you can delete this note.
