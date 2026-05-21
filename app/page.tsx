@@ -1,6 +1,6 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import Image from "next/image";
 import Link from "next/link";
 import { profile, projects, experience, skills } from "@/lib/data";
 import SectionReveal from "@/components/SectionReveal";
@@ -8,30 +8,55 @@ import Marquee from "@/components/Marquee";
 import ProjectCard from "@/components/ProjectCard";
 import LiquidGlass from "@/components/LiquidGlass";
 
-const HeroPortrait = dynamic(() => import("@/components/HeroPortrait"), { ssr: false });
-
 export default function Home() {
   const featured = projects.slice(0, 4);
 
   return (
     <>
-      {/* HERO — Marimba-inspired editorial layout */}
+      {/* HERO — full-bleed B&W portrait backdrop, Marimba-style editorial type overlay */}
       <section className="relative min-h-[100svh] w-full overflow-hidden">
-        {/* soft ambient backdrop */}
-        <div
-          aria-hidden
-          className="absolute inset-0 -z-10"
-          style={{
-            background:
-              "radial-gradient(60% 50% at 80% 20%, rgb(var(--accent) / 0.10), transparent 70%), radial-gradient(40% 40% at 10% 90%, rgb(var(--bone) / 0.05), transparent 70%)",
-          }}
-        />
+        {/* B&W portrait background */}
+        <div aria-hidden className="absolute inset-0 -z-10">
+          <Image
+            src="/SarangHerobanner.png"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+            style={{
+              objectPosition: "center right",
+              filter: "contrast(1.08) brightness(0.9)",
+            }}
+          />
+          {/* legibility gradient: dark left → translucent right */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(95deg, rgb(var(--ink)) 0%, rgb(var(--ink) / 0.85) 30%, rgb(var(--ink) / 0.45) 60%, rgb(var(--ink) / 0.2) 100%)",
+            }}
+          />
+          {/* bottom fade into next section */}
+          <div
+            className="absolute inset-x-0 bottom-0 h-48"
+            style={{ background: "linear-gradient(to bottom, transparent, rgb(var(--ink)))" }}
+          />
+          {/* accent glow */}
+          <div
+            className="absolute inset-0 mix-blend-overlay opacity-50"
+            style={{
+              background:
+                "radial-gradient(50% 40% at 80% 30%, rgb(var(--accent) / 0.18), transparent 70%)",
+            }}
+          />
+        </div>
 
-        <div className="mx-auto max-w-[1400px] px-6 md:px-10 pt-28 md:pt-32 pb-12">
+        <div className="relative mx-auto max-w-[1400px] px-6 md:px-10 pt-28 md:pt-32 pb-16 min-h-[100svh] flex flex-col">
           {/* top meta row */}
-          <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-widest text-bone/60 mb-10 md:mb-16">
+          <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-widest text-bone/70 mb-10 md:mb-16">
             <span>Portfolio — 2026 / vol. 02</span>
-            <LiquidGlass rounded="rounded-full" intensity="soft">
+            <LiquidGlass rounded="rounded-full" intensity="medium">
               <span className="flex items-center gap-2 px-3 py-1.5 text-[11px]">
                 <span className="relative flex w-1.5 h-1.5">
                   <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-60" />
@@ -42,35 +67,33 @@ export default function Home() {
             </LiquidGlass>
           </div>
 
-          {/* main row: type + portrait */}
-          <div className="grid grid-cols-12 gap-6 md:gap-10 items-center">
-            <div className="col-span-12 md:col-span-8">
-              <p className="font-mono text-xs uppercase tracking-widest text-accent mb-6">
-                {profile.title}
-              </p>
-              <h1 className="font-display tracking-tightest leading-[0.86] text-[18vw] md:text-[10.5vw]">
-                Sarang
-                <br />
-                <span className="italic text-bone/65">Nikhade</span>
-                <span className="text-accent">.</span>
-              </h1>
-            </div>
-
-            <div className="col-span-8 col-start-3 md:col-span-4 md:col-start-9 mt-8 md:mt-0">
-              <div className="relative w-full aspect-[4/5] max-w-[460px] ml-auto">
-                <HeroPortrait />
-              </div>
-            </div>
+          {/* main title block */}
+          <div className="flex-1 flex flex-col justify-center max-w-4xl">
+            <p className="font-mono text-xs uppercase tracking-widest text-accent mb-6">
+              {profile.title}
+            </p>
+            <h1
+              className="font-display tracking-tightest leading-[0.86] text-[18vw] md:text-[10.5vw]"
+              style={{ textShadow: "0 4px 60px rgb(var(--ink) / 0.6)" }}
+            >
+              Sarang
+              <br />
+              <span className="italic text-bone/75">Nikhade</span>
+              <span className="text-accent">.</span>
+            </h1>
           </div>
 
-          {/* bottom row: tagline + CTAs + scroll cue */}
-          <div className="mt-16 md:mt-20 grid grid-cols-12 gap-6 md:gap-10 items-end">
-            <div className="col-span-12 md:col-span-5">
-              <p className="font-display text-2xl md:text-3xl leading-[1.15] tracking-tightest text-bone/90">
+          {/* bottom row: tagline + CTAs */}
+          <div className="mt-12 grid grid-cols-12 gap-6 md:gap-10 items-end">
+            <div className="col-span-12 md:col-span-6">
+              <p
+                className="font-display text-2xl md:text-3xl leading-[1.15] tracking-tightest text-bone/90"
+                style={{ textShadow: "0 2px 20px rgb(var(--ink) / 0.6)" }}
+              >
                 {profile.tagline}
               </p>
             </div>
-            <div className="col-span-12 md:col-span-5 md:col-start-7 flex flex-wrap items-center gap-3">
+            <div className="col-span-12 md:col-span-6 flex flex-wrap items-center gap-3 md:justify-end">
               <Link
                 href="/projects"
                 className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-bone text-ink font-medium hover:bg-accent transition-colors"
@@ -80,13 +103,10 @@ export default function Home() {
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border hairline text-bone/90 hover:text-bone hover:border-bone/50 transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border hairline bg-ink/30 backdrop-blur-sm text-bone/95 hover:text-bone hover:border-bone/50 transition-colors"
               >
                 Get in touch
               </Link>
-              <span className="ml-auto hidden md:flex items-center gap-2 text-xs font-mono text-bone/50">
-                <span className="w-8 h-px bg-bone/40" /> Scroll
-              </span>
             </div>
           </div>
         </div>

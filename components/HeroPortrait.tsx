@@ -47,7 +47,7 @@ export default function HeroPortrait() {
             priority
             sizes="(max-width: 768px) 80vw, 38vw"
             className="object-cover"
-            style={{ filter: "grayscale(1) contrast(1.08) brightness(0.96)" }}
+            style={{ filter: "contrast(1.08) brightness(0.96)" }}
             onError={() => setSrc(null)}
           />
         ) : (
