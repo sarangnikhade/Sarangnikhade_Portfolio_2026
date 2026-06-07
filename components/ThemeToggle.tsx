@@ -16,6 +16,11 @@ export default function ThemeToggle() {
 
   const apply = (t: Theme) => {
     document.documentElement.dataset.theme = t;
+    if (t === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
     localStorage.setItem("theme", t);
   };
 

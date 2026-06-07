@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { profile, projects, experience, skills } from "@/lib/data";
 import SectionReveal from "@/components/SectionReveal";
 import Marquee from "@/components/Marquee";
@@ -11,36 +12,80 @@ import LiquidGlass from "@/components/LiquidGlass";
 export default function Home() {
   const featured = projects.slice(0, 4);
 
+  // High-end mouse hover parallax inputs
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Premium physics configuration: spring dampening, stiffness, and mass
+  const springConfig = { damping: 25, stiffness: 120, mass: 0.5 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { currentTarget, clientX, clientY } = e;
+    const { left, top, width, height } = currentTarget.getBoundingClientRect();
+    
+    // Normalize coordinates to -0.5 to 0.5 range
+    const x = (clientX - left) / width - 0.5;
+    const y = (clientY - top) / height - 0.5;
+    
+    // Scale movement to safe maximum translation offset (28px)
+    mouseX.set(x * 28);
+    mouseY.set(y * 28);
+  };
+
+  const handleMouseLeave = () => {
+    // Smoothly spring-back to original center when mouse departs the viewport section
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
   return (
     <>
       {/* HERO — full-bleed B&W portrait backdrop, Marimba-style editorial type overlay */}
-      <section className="relative min-h-[100svh] w-full overflow-hidden">
+      <section
+        className="relative min-h-[100svh] w-full overflow-hidden isolate"
+        style={{ backgroundColor: "var(--hero-bg)" }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
         {/* B&W portrait background */}
         <div aria-hidden className="absolute inset-0 -z-10">
-          <Image
-            src="/SarangHerobanner.png"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-            style={{
-              objectPosition: "center right",
-              filter: "contrast(1.08) brightness(0.9)",
-            }}
-          />
-          {/* legibility gradient: dark left → translucent right */}
+          {/* Centered, size-reduced portrait container shifted to the right */}
+          <div className="absolute left-[52%] md:left-[56%] top-0 bottom-0 w-[85vw] md:w-[48vw] -translate-x-1/2 opacity-75 md:opacity-80">
+            <motion.div
+              className="relative w-full h-full"
+              style={{
+                x: smoothX,
+                y: smoothY,
+              }}
+            >
+              <Image
+                src="/SarangHerobanner.png"
+                alt=""
+                fill
+                priority
+                sizes="(max-width: 768px) 85vw, 48vw"
+                className="object-cover"
+                style={{
+                  objectPosition: "center",
+                  filter: "contrast(1.08) brightness(0.95)",
+                }}
+              />
+            </motion.div>
+          </div>
+          {/* legibility gradient: cinematic center spotlight vignette */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(95deg, rgb(var(--ink)) 0%, rgb(var(--ink) / 0.85) 30%, rgb(var(--ink) / 0.45) 60%, rgb(var(--ink) / 0.2) 100%)",
+                "radial-gradient(circle at center, rgba(var(--hero-bg-rgb), 0.1) 0%, rgba(var(--hero-bg-rgb), 0.5) 45%, rgba(var(--hero-bg-rgb), 0.95) 85%, var(--hero-bg) 100%)",
             }}
           />
           {/* bottom fade into next section */}
           <div
             className="absolute inset-x-0 bottom-0 h-48"
-            style={{ background: "linear-gradient(to bottom, transparent, rgb(var(--ink)))" }}
+            style={{ background: "linear-gradient(to bottom, transparent, var(--hero-bg))" }}
           />
           {/* accent glow */}
           <div
@@ -54,8 +99,7 @@ export default function Home() {
 
         <div className="relative mx-auto max-w-[1400px] px-6 md:px-10 pt-28 md:pt-32 pb-16 min-h-[100svh] flex flex-col">
           {/* top meta row */}
-          <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-widest text-bone/70 mb-10 md:mb-16">
-            <span>Portfolio — 2026 / vol. 02</span>
+          <div className="flex items-center justify-end font-mono text-[11px] uppercase tracking-widest text-bone/70 mb-10 md:mb-16">
             <LiquidGlass rounded="rounded-full" intensity="medium">
               <span className="flex items-center gap-2 px-3 py-1.5 text-[11px]">
                 <span className="relative flex w-1.5 h-1.5">

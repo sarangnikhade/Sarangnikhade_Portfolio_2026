@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-display: "Instrument Serif", "Times New Roman", serif;
+  --font-sans: "Google Sans", "Inter", system-ui, sans-serif;
+  --font-display: "Google Sans Flex", "Google Sans", system-ui, sans-serif;
 
   /* Theme tokens — space-separated rgb so Tailwind alpha modifiers work */
   --ink: 10 10 11;
@@ -19,6 +19,10 @@
   --glass-shadow: 0 0 0;
   --glass-highlight: 255 255 255;
   color-scheme: dark;
+
+  /* Hero banner dynamic colors */
+  --hero-bg: #000000;
+  --hero-bg-rgb: 0, 0, 0;
 }
 
 [data-theme="light"] {
@@ -32,6 +36,10 @@
   --glass-shadow: 80 80 90;
   --glass-highlight: 255 255 255;
   color-scheme: light;
+
+  /* Hero banner dynamic colors */
+  --hero-bg: #f5f1ea;
+  --hero-bg-rgb: 245, 241, 234;
 }
 
 html, body {
@@ -44,7 +52,17 @@ html, body {
 
 body {
   font-family: var(--font-sans);
+  font-weight: 400;
   overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+p, a, span {
+  font-weight: 400;
 }
 
 ::selection { background: rgb(var(--accent)); color: rgb(var(--ink)); }
@@ -87,3 +105,45 @@ body {
   transition: background-size 400ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .link-underline:hover { background-size: 100% 1px; }
+
+@keyframes floatSlow {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  33% { transform: translate(60px, -45px) scale(1.06) rotate(120deg); }
+  66% { transform: translate(-30px, 80px) scale(0.94) rotate(240deg); }
+  100% { transform: translate(0, 0) scale(1) rotate(360deg); }
+}
+
+.animate-float-slow {
+  animation: floatSlow 24s infinite alternate ease-in-out;
+  will-change: transform;
+}
+
+@keyframes sweep {
+  0% { transform: translateY(-20%); opacity: 0; }
+  10% { opacity: 0.18; }
+  90% { opacity: 0.18; }
+  100% { transform: translateY(120%); opacity: 0; }
+}
+
+.animate-sweep {
+  animation: sweep 14s infinite linear;
+  will-change: transform;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 50s infinite linear;
+}
+
+@keyframes telemetryPulse {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.45; }
+}
+
+.animate-telemetry-pulse {
+  animation: telemetryPulse 5s infinite ease-in-out;
+}

@@ -9,12 +9,13 @@ type Props = {
   intensity?: "soft" | "medium" | "strong";
   style?: CSSProperties;
   as?: "div" | "span" | "section";
+  clean?: boolean;
 };
 
 const intensityMap = {
-  soft: { blur: 14, sat: 140, opacity: 0.06 },
-  medium: { blur: 22, sat: 170, opacity: 0.09 },
-  strong: { blur: 34, sat: 200, opacity: 0.13 },
+  soft: { blur: 14, sat: 140, opacity: 0.04 },
+  medium: { blur: 24, sat: 180, opacity: 0.06 },
+  strong: { blur: 36, sat: 220, opacity: 0.08 },
 };
 
 export default function LiquidGlass({
@@ -24,6 +25,7 @@ export default function LiquidGlass({
   intensity = "medium",
   style,
   as: Tag = "div",
+  clean = false,
 }: Props) {
   const cfg = intensityMap[intensity];
   return (
@@ -31,7 +33,9 @@ export default function LiquidGlass({
       className={`relative isolate overflow-hidden ${rounded} ${className}`}
       style={{
         backgroundColor: `rgb(var(--glass-tint) / ${cfg.opacity})`,
-        backdropFilter: `blur(${cfg.blur}px) saturate(${cfg.sat}%) url(#liquid-glass-distort)`,
+        backdropFilter: clean
+          ? `blur(${cfg.blur}px) saturate(${cfg.sat}%)`
+          : `blur(${cfg.blur}px) saturate(${cfg.sat}%) url(#liquid-glass-distort)`,
         WebkitBackdropFilter: `blur(${cfg.blur}px) saturate(${cfg.sat}%)`,
         boxShadow: `
           inset 0 1px 0 rgb(var(--glass-highlight) / 0.35),
