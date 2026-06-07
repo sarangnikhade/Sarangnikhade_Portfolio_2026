@@ -1,6 +1,6 @@
 export const profile = {
   name: "Sarang Nikhade",
-  title: "Sr. UI/UX & Game Designer",
+  title: "UX/UI & Game Designer",
   tagline: "Designing immersive, intuitive experiences across screens, worlds, and play.",
   about:
     "Senior UI/UX designer with a passion for mobile and game UI, VR, and user-centred design. I specialize in game prototyping, interaction systems, and turning ambiguous briefs into shipped, considered products.",

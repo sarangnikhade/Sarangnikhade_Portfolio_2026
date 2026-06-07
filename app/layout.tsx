@@ -18,11 +18,11 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Sarang Nikhade — Sr. UI/UX & Game Designer",
+  title: "Sarang Nikhade — UX/UI & Game Designer",
   description:
     "Portfolio of Sarang Nikhade — senior UI/UX and game designer working across mobile, web, VR, and interactive systems.",
   openGraph: {
-    title: "Sarang Nikhade — Sr. UI/UX & Game Designer",
+    title: "Sarang Nikhade — UX/UI & Game Designer",
     description: "Designing immersive, intuitive experiences across screens, worlds, and play.",
     type: "website",
   },
