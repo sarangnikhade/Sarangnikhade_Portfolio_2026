@@ -25,8 +25,6 @@ export default function Footer() {
         <div className="md:col-span-3 text-sm space-y-3">
           <p className="text-mute uppercase tracking-widest text-xs">Elsewhere</p>
           <a href={profile.socials.linkedin} target="_blank" rel="noreferrer" className="block link-underline">LinkedIn</a>
-          <a href={profile.socials.instagram} target="_blank" rel="noreferrer" className="block link-underline">Instagram</a>
-          <a href={profile.socials.facebook} target="_blank" rel="noreferrer" className="block link-underline">Facebook</a>
         </div>
       </div>
       <div className="mx-auto max-w-[1400px] px-6 md:px-10 pb-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs text-mute">

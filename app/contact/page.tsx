@@ -43,8 +43,6 @@ export default function ContactPage() {
           </div>
           <div className="flex gap-6 pt-4">
             <a href={profile.socials.linkedin} target="_blank" rel="noreferrer" className="link-underline">LinkedIn</a>
-            <a href={profile.socials.instagram} target="_blank" rel="noreferrer" className="link-underline">Instagram</a>
-            <a href={profile.socials.facebook} target="_blank" rel="noreferrer" className="link-underline">Facebook</a>
           </div>
         </div>
       </div>

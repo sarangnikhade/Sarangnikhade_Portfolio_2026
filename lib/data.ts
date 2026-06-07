@@ -9,8 +9,6 @@ export const profile = {
   location: "United Kingdom",
   socials: {
     linkedin: "https://www.linkedin.com/in/sarangnikhade/",
-    instagram: "https://www.instagram.com/i_am_sarangnikhade/",
-    facebook: "https://www.facebook.com/sarangnikh/",
   },
 };
 
