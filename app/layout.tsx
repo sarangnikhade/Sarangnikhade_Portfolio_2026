@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
+import "@fontsource/google-sans/400.css";
+import "@fontsource/google-sans/600.css";
+import "@fontsource/google-sans-flex/index.css";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -8,16 +11,9 @@ import { LiquidGlassDefs } from "@/components/LiquidGlass";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
+  style: ["italic"],
+  variable: "--font-cursive",
   display: "swap",
 });
 
@@ -34,7 +30,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="en" className={playfair.variable}>
       <head>
         <script
           dangerouslySetInnerHTML={{

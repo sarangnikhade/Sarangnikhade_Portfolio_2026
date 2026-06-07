@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --font-sans: var(--font-sans, "Inter", system-ui, sans-serif);
-  --font-display: var(--font-display, "Playfair Display", Georgia, serif);
+  --font-sans: "Google Sans", "Inter", system-ui, sans-serif;
+  --font-display: "Google Sans Flex", "Google Sans", system-ui, sans-serif;
 
   /* Theme tokens — space-separated rgb so Tailwind alpha modifiers work */
   --ink: 10 10 11;
@@ -51,23 +51,23 @@ html, body {
 }
 
 body {
-  font-family: var(--font-sans), "Inter", system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
   overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display), "Playfair Display", Georgia, serif;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-weight: 600;
 }
 
 p, a, span {
   font-weight: 400;
 }
 
-/* Cursive accent: italic serif + accent color — the signature editorial style */
+/* Cursive accent: Playfair Display italic + accent color — the editorial highlight */
 .font-cursive {
-  font-family: var(--font-display), "Playfair Display", Georgia, serif;
+  font-family: var(--font-cursive), "Playfair Display", Georgia, serif;
   font-style: italic;
   color: rgb(var(--accent));
 }

@@ -12,8 +12,8 @@ export default {
         accent: "rgb(var(--accent) / <alpha-value>)",
       },
       fontFamily: {
-        display: ["var(--font-display)", "Playfair Display", "Georgia", "serif"],
-        sans: ["var(--font-sans)", "Inter", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "serif"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["ui-monospace", "SFMono-Regular", "monospace"],
       },
       letterSpacing: { tightest: "-0.04em" },
