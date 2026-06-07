@@ -21,7 +21,7 @@ export default function ContactPage() {
         <p className="font-mono text-xs uppercase tracking-widest text-accent mb-6">Get in touch</p>
         <h1 className="font-display text-6xl md:text-8xl leading-[0.9] tracking-tightest">
           Say<br />
-          <span className="italic text-bone/60">hello</span>
+          <span className="font-cursive">hello</span>
           <span className="text-accent">.</span>
         </h1>
         <p className="mt-8 max-w-md text-bone/70">

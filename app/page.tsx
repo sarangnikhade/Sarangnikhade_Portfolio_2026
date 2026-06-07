@@ -122,7 +122,7 @@ export default function Home() {
             >
               Sarang
               <br />
-              <span className="italic text-bone/75">Nikhade</span>
+              <span className="font-cursive">Nikhade</span>
               <span className="text-accent">.</span>
             </h1>
           </div>
@@ -167,7 +167,7 @@ export default function Home() {
         <SectionReveal className="md:col-span-9">
           <h2 className="font-display text-4xl md:text-6xl leading-[1.05] tracking-tightest">
             Eight years between pixels and play. I design interfaces that feel inevitable
-            <span className="italic text-bone/60"> — and systems people actually want to come back to.</span>
+            <span className="font-cursive"> — and systems people actually want to come back to.</span>
           </h2>
           <p className="mt-10 max-w-2xl text-bone/70 leading-relaxed">{profile.about}</p>
         </SectionReveal>

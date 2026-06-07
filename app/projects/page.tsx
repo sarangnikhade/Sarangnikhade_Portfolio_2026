@@ -17,7 +17,7 @@ export default function ProjectsPage() {
       <section className="pt-40 pb-16 mx-auto max-w-[1400px] px-6 md:px-10">
         <p className="font-mono text-xs uppercase tracking-widest text-accent mb-6">Index of work</p>
         <h1 className="font-display text-6xl md:text-[10vw] leading-[0.9] tracking-tightest">
-          Projects<span className="italic text-bone/60">.</span>
+          Projects<span className="font-cursive">.</span>
         </h1>
         <p className="mt-8 max-w-xl text-bone/70">
           A working archive of shipped products, interactive systems, and explorations across UI/UX,

@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-16 grid gap-12 md:grid-cols-12">
         <div className="md:col-span-6">
           <p className="font-display text-5xl md:text-7xl leading-[0.95] tracking-tightest">
-            Let&apos;s build<br /> something good.
+            Let&apos;s build<br /><span className="font-cursive">something good.</span>
           </p>
           <Link
             href="/contact"
