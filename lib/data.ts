@@ -3,7 +3,8 @@ export const profile = {
   title: "UX/UI & Game Designer",
   tagline: "Designing immersive, intuitive experiences across screens, worlds, and play.",
   about:
-    "Senior UI/UX designer with a passion for mobile and game UI, VR, and user-centred design. I specialize in game prototyping, interaction systems, and turning ambiguous briefs into shipped, considered products.",
+    "Senior UX/UI designer, 8 years across mobile, web, and product. Recently completed an MA in Game Development, now applying interaction and systems design to game UI and VR. Figma to Unity.",
+  cvHref: "/sarang-nikhade-cv.pdf",
   email: "sarang.nikhade@outlook.com",
   phone: "+44 7586 505256",
   location: "United Kingdom",
@@ -12,8 +13,27 @@ export const profile = {
   },
 };
 
+export type Visual = {
+  src: string;
+  alt: string;
+  caption?: string;
+  /** Optional grouping — when set, the visual is rendered under the matching narrative section. */
+  section?: "context" | "problem" | "approach" | "outcome";
+};
+
 export type CaseStudy = {
   cover?: string;
+  timeline?: string;
+
+  // New narrative shape
+  context?: string;
+  problem?: string;
+  approach?: string[];
+  outcomeText?: string;
+  reflection?: string;
+  visuals?: Visual[];
+
+  // Existing fields kept (still rendered when present)
   research?: string;
   goal?: string;
   brief?: string;
@@ -38,6 +58,8 @@ export type Project = {
   tools: string[];
   href: string;
   image: string;
+  /** One-line outcome shown on cards (metric or qualitative). */
+  outcomeLine?: string;
   case?: CaseStudy;
 };
 
@@ -52,6 +74,7 @@ export const projects: Project[] = [
     tools: ["Figma", "Design System", "Prototyping"],
     href: "/projects/synnefo-isp",
     image: "https://static.wixstatic.com/media/e4d30e_f9b18c43ee684cca8a422a8f98d08cf2~mv2.png/v1/fill/w_400,h_400,al_c,q_88,enc_avif,quality_auto/Hand%20and%20iPhone%2016%20Pro.png",
+    outcomeLine: "Every core task ≤ 3 taps from home",
     case: {
       cover:
         "https://static.wixstatic.com/media/e4d30e_f9b18c43ee684cca8a422a8f98d08cf2~mv2.png/v1/fill/w_1400,h_780,al_c,q_90,enc_avif,quality_auto/Hand%20and%20iPhone%2016%20Pro.png",
@@ -105,9 +128,30 @@ export const projects: Project[] = [
     tools: ["Figma", "User Research", "Motion"],
     href: "/projects/facepe-payment",
     image: "https://static.wixstatic.com/media/e4d30e_5f891200e6574edbbae7b12e9f9f726c~mv2.png/v1/crop/x_270,y_0,w_960,h_960/fill/w_400,h_400,al_c,q_88,enc_avif,quality_auto/Hand%20and%20iPhone%2016%20Pro_1.png",
+    outcomeLine: "Sub-3s auth · consent pattern adopted as team standard",
     case: {
       cover:
         "https://static.wixstatic.com/media/e4d30e_5f891200e6574edbbae7b12e9f9f726c~mv2.png/v1/fill/w_1400,h_780,al_c,q_90,enc_avif,quality_auto/Hand%20and%20iPhone%2016%20Pro_1.png",
+      timeline: "2025",
+      context:
+        "Face-authenticated payment experience for point-of-sale retail.",
+      problem:
+        "Card and PIN checkout is slow — queues build at peak. Need sub-3-second authentication customers actually trust with biometric data. Tension: speed vs. trust vs. accessibility, all at once.",
+      approach: [
+        "Interviewed cashiers and shoppers — trust, not speed, was the #1 adoption blocker.",
+        "Designed explicit consent flow + live feedback states (scanning / matched / failed) so user always knows what the camera is doing.",
+        "Used motion cues to reduce perceived wait time during auth.",
+        "Built accessible fallback path for failed scans — no dead ends, always a way to complete payment.",
+      ],
+      outcomeText:
+        "TODO: real metric — auth time, match success rate, or pilot result. Placeholder qualitative: shipped clickable prototype validated in stakeholder review; consent pattern adopted as team standard.",
+      reflection:
+        "Trust UX mattered more than raw speed UX. Next iteration: test under low-light store conditions and edge-case faces.",
+      visuals: [
+        { src: "TODO", alt: "Consent screen", caption: "Explicit biometric consent", section: "approach" },
+        { src: "TODO", alt: "Auth states", caption: "Scanning / matched / failed feedback", section: "approach" },
+        { src: "TODO", alt: "Fallback flow", caption: "Failed-scan recovery path", section: "approach" },
+      ],
       brief:
         "FacePe is a face-authenticated payment experience designed for the point of sale — built around sub-second authorisation, clear trust signals, and accessible fallbacks for users who can't or won't use card or phone.",
       research:
@@ -158,6 +202,7 @@ export const projects: Project[] = [
     tools: ["Figma", "AI UX", "Prototyping"],
     href: "/projects/skliq",
     image: "https://static.wixstatic.com/media/e4d30e_23944eefa0264a33919b9de53c3d1950~mv2.png/v1/crop/x_270,y_0,w_960,h_960/fill/w_400,h_400,al_c,q_88,enc_avif,quality_auto/Hand%20and%20iPhone%2016%20Pro.png",
+    outcomeLine: "Unified chat + controls — zero context-switching",
     case: {
       cover:
         "https://static.wixstatic.com/media/e4d30e_23944eefa0264a33919b9de53c3d1950~mv2.png/v1/fill/w_1400,h_780,al_c,q_90,enc_avif,quality_auto/Hand%20and%20iPhone%2016%20Pro.png",
@@ -205,13 +250,14 @@ export const projects: Project[] = [
     slug: "wings-of-freedom",
     title: "Wings of Freedom",
     category: "Game",
-    year: "2025",
+    year: "2024–2025",
     role: "Game Designer",
     blurb:
       "A competitive asymmetric multiplayer game built in Unity 6, integrating VR and PC players in a single shared environment.",
     tools: ["Unity 6", "Netcode", "Meta Quest 3", "Figma"],
     href: "/projects/wings-of-freedom",
     image: "https://static.wixstatic.com/media/e4d30e_bb2df752579c44af8eb3a15ef0b7b10d~mv2.png/v1/fill/w_286,h_335,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/B1.png",
+    outcomeLine: "Real-time VR↔PC crossplay · playtested & balanced",
     case: {
       cover:
         "https://static.wixstatic.com/media/e4d30e_f818458c0a9e4ed8bfbe2eb8677d2ce6~mv2.png/v1/fill/w_1200,h_700,al_c,q_90,enc_avif,quality_auto/Screenshot%202025-01-06%20220533.png",
@@ -278,6 +324,7 @@ export const projects: Project[] = [
     tools: ["Unreal Engine 5", "GitHub", "Trello", "Miro"],
     href: "/projects/eco-rescuers",
     image: "https://static.wixstatic.com/media/e4d30e_6556a025fc2444839f4539962920542f~mv2.png/v1/crop/x_75,y_0,w_874,h_1024/fill/w_286,h_335,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/file.png",
+    outcomeLine: "4-player co-op · mapped to 4 UN SDGs",
     case: {
       cover:
         "https://static.wixstatic.com/media/e4d30e_96ea7a5703f84df5ae84409177113927~mv2.png/v1/fill/w_1200,h_700,al_c,q_90,enc_avif,quality_auto/file.png",
@@ -332,13 +379,14 @@ export const projects: Project[] = [
     slug: "shattered-sky",
     title: "Shattered Sky",
     category: "Game",
-    year: "2025",
+    year: "2024–2025",
     role: "Level, Environment & Developer",
     blurb:
       "A narrative-driven co-op game where two players, bound by a parasite, must overcome distrust and cultural barriers while exploring alien worlds.",
     tools: ["Unity 6", "Netcode", "Figma", "Photoshop", "Cinemachine"],
     href: "/projects/shattered-sky",
     image: "https://static.wixstatic.com/media/e4d30e_3c700ee61a4841409eb24bfb662a490e~mv2.jpg/v1/crop/x_7,y_0,w_535,h_627/fill/w_286,h_335,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/file.jpg",
+    outcomeLine: "5 worlds · 3 endings · asymmetric co-op",
     case: {
       cover:
         "https://static.wixstatic.com/media/e4d30e_4f6a9723c747419e9ef313d8ed353b8a~mv2.png/v1/fill/w_1200,h_700,al_c,q_90,enc_avif,quality_auto/file.png",
@@ -405,6 +453,7 @@ export const projects: Project[] = [
     tools: ["Unity", "C#", "Mobile"],
     href: "/projects/snow-mania",
     image: "https://static.wixstatic.com/media/e4d30e_20f456c9fe734ba4b1629a07515dc9b2~mv2.png/v1/crop/x_538,y_0,w_750,h_879/fill/w_286,h_335,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/file.png",
+    outcomeLine: "One-button control · 30–90s session loop",
     case: {
       cover:
         "https://static.wixstatic.com/media/e4d30e_20f456c9fe734ba4b1629a07515dc9b2~mv2.png/v1/fill/w_1200,h_700,al_c,q_90,enc_avif,quality_auto/file.png",
@@ -449,6 +498,7 @@ export const projects: Project[] = [
     tools: ["Unity 6", "Game Jam", "Rapid Prototyping"],
     href: "/projects/timetrick",
     image: "https://static.wixstatic.com/media/e4d30e_c04f5c913c4540078b4a6d9a9d83ccf1~mv2.png/v1/fill/w_286,h_335,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/file.png",
+    outcomeLine: "Shipped in 7 days · published on itch.io",
     case: {
       cover:
         "https://static.wixstatic.com/media/e4d30e_c04f5c913c4540078b4a6d9a9d83ccf1~mv2.png/v1/fill/w_1200,h_700,al_c,q_90,enc_avif,quality_auto/file.png",
@@ -504,9 +554,23 @@ export const education = [
   { period: "2011 — 2014", school: "Anitoons School of Animation", degree: "B.Sc Graphics & Multimedia" },
 ];
 
+export const capabilities = {
+  core: ["Product Design", "UI/UX", "Design Systems", "Prototyping"],
+  specialism: ["Game UI", "VR / Spatial UX", "Motion"],
+  methods: ["User Research", "Wireframing", "Figma", "Unity", "Adobe CC"],
+} as const;
+
+export const capabilityGroups: { label: string; items: readonly string[] }[] = [
+  { label: "Core", items: capabilities.core },
+  { label: "Specialism", items: capabilities.specialism },
+  { label: "Methods & Tools", items: capabilities.methods },
+];
+
+/** @deprecated use `capabilities` / `capabilityGroups` */
 export const skills = [
-  "Product Design", "UI/UX", "Game UI", "VR / Spatial UX", "Prototyping", "Wireframing",
-  "User Research", "Design Systems", "Figma", "Unity", "Adobe CC", "Motion",
+  ...capabilities.core,
+  ...capabilities.specialism,
+  ...capabilities.methods,
 ];
 
 export function getProject(slug: string) {

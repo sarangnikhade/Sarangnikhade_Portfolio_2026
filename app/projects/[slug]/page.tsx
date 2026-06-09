@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { projects, getProject } from "@/lib/data";
+import { projects, getProject, type Visual } from "@/lib/data";
 import VideoEmbed from "@/components/VideoEmbed";
 import SectionReveal from "@/components/SectionReveal";
 import Carousel from "@/components/Carousel";
@@ -127,6 +127,62 @@ function getMethodIcon(label: string) {
   return <Wrench className="w-4 h-4 text-accent" />;
 }
 
+// Small reusable section label — keeps the "NN — Title" pattern consistent
+function SectionLabel({ num, label }: { num: string; label: string }) {
+  return (
+    <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-mute mb-2">
+      <span className="px-2 py-0.5 rounded bg-bone/5 border border-bone/10">{num}</span>
+      <span>{label}</span>
+    </div>
+  );
+}
+
+// Renders typed visuals. Items with src === "TODO" become accessible placeholders
+// so the page never 404s on a missing image while content is being filled in.
+function VisualsBlock({ items }: { items: Visual[] }) {
+  if (!items.length) return null;
+  return (
+    <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {items.map((v, i) => {
+        const isTodo = !v.src || v.src === "TODO";
+        return (
+          <figure
+            key={`${v.alt}-${i}`}
+            className="rounded-xl border border-bone/10 bg-bone/[0.02] overflow-hidden"
+          >
+            <div className="relative w-full aspect-[16/10] bg-bone/5">
+              {isTodo ? (
+                <div
+                  role="img"
+                  aria-label={v.alt}
+                  className="absolute inset-0 flex items-center justify-center font-mono text-[10px] uppercase tracking-widest text-mute"
+                >
+                  <span className="px-3 py-1 rounded-full border hairline">
+                    {v.alt} · image pending
+                  </span>
+                </div>
+              ) : (
+                <Image
+                  src={v.src}
+                  alt={v.alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover"
+                />
+              )}
+            </div>
+            {v.caption && (
+              <figcaption className="px-4 py-3 font-mono text-[11px] uppercase tracking-widest text-mute border-t border-bone/10">
+                {v.caption}
+              </figcaption>
+            )}
+          </figure>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function ProjectCaseStudy({ params }: { params: { slug: string } }) {
   const project = getProject(params.slug);
   if (!project || !project.case) notFound();
@@ -138,6 +194,14 @@ export default function ProjectCaseStudy({ params }: { params: { slug: string } 
   const next = idx < cases.length - 1 ? cases[idx + 1] : cases[0];
 
   const isGame = project.category === "Game";
+
+  // Group visuals by narrative section; ungrouped fall into the final Visuals block.
+  const visuals = c.visuals ?? [];
+  const visualsByApproach = visuals.filter((v) => v.section === "approach");
+  const visualsByContext  = visuals.filter((v) => v.section === "context");
+  const visualsByProblem  = visuals.filter((v) => v.section === "problem");
+  const visualsByOutcome  = visuals.filter((v) => v.section === "outcome");
+  const visualsUngrouped  = visuals.filter((v) => !v.section);
 
   // Visual variables mapping with dynamic light/dark modes
   // In Dark Mode: emerald-400 (green) is preserved
@@ -291,17 +355,114 @@ export default function ProjectCaseStudy({ params }: { params: { slug: string } 
         </div>
       )}
 
-      {/* INSIGHT & STRATEGIC GOAL DASHBOARD */}
+      {/* 02 — CONTEXT */}
+      {c.context && (
+        <section className="mt-20 md:mt-28 mx-auto max-w-[1400px] px-6 md:px-10">
+          <SectionLabel num="02" label="Context" />
+          <p className="font-display text-2xl md:text-3xl leading-[1.3] tracking-tight text-bone/90 max-w-4xl">
+            {c.context}
+          </p>
+          {visualsByContext.length > 0 && <VisualsBlock items={visualsByContext} />}
+        </section>
+      )}
+
+      {/* 03 — PROBLEM */}
+      {c.problem && (
+        <section className="mt-20 md:mt-28 mx-auto max-w-[1400px] px-6 md:px-10">
+          <SectionLabel num="03" label="Problem" />
+          <h2 className="font-display text-3xl md:text-5xl font-semibold tracking-tightest mb-6">
+            What was broken
+          </h2>
+          <p className="text-bone/75 text-base sm:text-lg leading-relaxed max-w-4xl border-l-2 border-accent/30 pl-6">
+            {c.problem}
+          </p>
+          {visualsByProblem.length > 0 && <VisualsBlock items={visualsByProblem} />}
+        </section>
+      )}
+
+      {/* 04 — APPROACH */}
+      {c.approach && c.approach.length > 0 && (
+        <section className="mt-24 md:mt-32 mx-auto max-w-[1400px] px-6 md:px-10">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-bone/10 pb-6 mb-10">
+            <div>
+              <SectionLabel num="04" label="Approach" />
+              <h2 className="font-display text-3xl md:text-5xl font-semibold tracking-tightest">
+                How I worked it
+              </h2>
+            </div>
+            <p className="mt-2 sm:mt-0 font-mono text-[11px] uppercase tracking-widest text-mute">
+              {c.approach.length} decisions
+            </p>
+          </div>
+          <ol className="space-y-5 max-w-4xl">
+            {c.approach.map((step, i) => (
+              <SectionReveal key={i}>
+                <li className="flex gap-5 items-start">
+                  <span className="font-mono text-xs text-accent pt-1 tabular-nums">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-bone/85 text-base sm:text-lg leading-relaxed">{step}</p>
+                </li>
+              </SectionReveal>
+            ))}
+          </ol>
+          {visualsByApproach.length > 0 && <VisualsBlock items={visualsByApproach} />}
+        </section>
+      )}
+
+      {/* 05 — OUTCOME (text) */}
+      {c.outcomeText && (
+        <section className="mt-24 md:mt-32 mx-auto max-w-[1400px] px-6 md:px-10">
+          <SectionLabel num="05" label="Outcome" />
+          <h2 className="font-display text-3xl md:text-5xl font-semibold tracking-tightest mb-8">
+            What it shipped
+          </h2>
+          <LiquidGlass intensity="soft" rounded="rounded-2xl" className={`p-6 md:p-8 ${themeGlowClass}`}>
+            <div className="flex items-start gap-4">
+              <div className="p-2 rounded-xl bg-accent/10 border border-accent/20 mt-1">
+                <Trophy className="w-5 h-5 text-accent" />
+              </div>
+              <p className="text-bone/85 text-base sm:text-lg leading-relaxed">
+                {c.outcomeText}
+              </p>
+            </div>
+          </LiquidGlass>
+          {visualsByOutcome.length > 0 && <VisualsBlock items={visualsByOutcome} />}
+        </section>
+      )}
+
+      {/* 06 — REFLECTION */}
+      {c.reflection && (
+        <section className="mt-20 md:mt-28 mx-auto max-w-[1400px] px-6 md:px-10">
+          <SectionLabel num="06" label="Reflection" />
+          <blockquote className="font-display italic text-2xl sm:text-3xl md:text-4xl leading-[1.25] tracking-tight text-bone/90 max-w-4xl border-l-4 border-accent pl-6">
+            {c.reflection}
+          </blockquote>
+        </section>
+      )}
+
+      {/* 07 — UNGROUPED VISUALS (when visuals supplied without a section tag) */}
+      {visualsUngrouped.length > 0 && (
+        <section className="mt-24 md:mt-32 mx-auto max-w-[1400px] px-6 md:px-10">
+          <SectionLabel num="07" label="Visuals" />
+          <h2 className="font-display text-3xl md:text-5xl font-semibold tracking-tightest mb-2">
+            Process & screens
+          </h2>
+          <VisualsBlock items={visualsUngrouped} />
+        </section>
+      )}
+
+      {/* INSIGHT & STRATEGIC GOAL DASHBOARD (legacy fields — kept for older projects) */}
       {(c.research || c.goal) && (
         <section className="mt-20 md:mt-32 mx-auto max-w-[1400px] px-6 md:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-            
+
             {/* RESEARCH QUESTION */}
             {c.research && (
               <div className="lg:col-span-7 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-mute mb-6">
-                    <span className="px-2 py-0.5 rounded bg-bone/5 border border-bone/10">02</span>
+                    <span className="px-2 py-0.5 rounded bg-bone/5 border border-bone/10">08</span>
                     <span>Research Challenge</span>
                   </div>
                   <blockquote className="font-display italic text-2xl sm:text-3xl md:text-4xl leading-[1.25] tracking-tight text-bone/90 relative pl-4 border-l-4 border-accent">
@@ -349,7 +510,7 @@ export default function ProjectCaseStudy({ params }: { params: { slug: string } 
           <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-bone/10 pb-6 mb-12">
             <div>
               <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-mute mb-2">
-                <span className="px-2 py-0.5 rounded bg-bone/5 border border-bone/10">03</span>
+                <span className="px-2 py-0.5 rounded bg-bone/5 border border-bone/10">09</span>
                 <span>Product Mechanics</span>
               </div>
               <h2 className="font-display text-3xl md:text-5xl font-semibold tracking-tightest">Key Features</h2>
@@ -399,7 +560,7 @@ export default function ProjectCaseStudy({ params }: { params: { slug: string } 
           <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-bone/10 pb-6 mb-12">
             <div>
               <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-mute mb-2">
-                <span className="px-2 py-0.5 rounded bg-bone/5 border border-bone/10">04</span>
+                <span className="px-2 py-0.5 rounded bg-bone/5 border border-bone/10">10</span>
                 <span>Architecture</span>
               </div>
               <h2 className="font-display text-3xl md:text-5xl font-semibold tracking-tightest">Methods & Technology</h2>
@@ -441,7 +602,7 @@ export default function ProjectCaseStudy({ params }: { params: { slug: string } 
           <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-bone/10 pb-6 mb-12">
             <div>
               <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-mute mb-2">
-                <span className="px-2 py-0.5 rounded bg-accent/10 dark:bg-emerald-500/10 border border-accent/20 dark:border-emerald-500/20 text-accent dark:text-emerald-400 font-bold">05</span>
+                <span className="px-2 py-0.5 rounded bg-accent/10 dark:bg-emerald-500/10 border border-accent/20 dark:border-emerald-500/20 text-accent dark:text-emerald-400 font-bold">11</span>
                 <span className="dark:text-emerald-400 text-accent">Tactical Telemetry</span>
               </div>
               <h2 className="font-display text-3xl md:text-5xl font-semibold tracking-tightest">World Index & Level Dossier</h2>
@@ -492,7 +653,7 @@ export default function ProjectCaseStudy({ params }: { params: { slug: string } 
           <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-bone/10 pb-6 mb-12">
             <div>
               <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-mute mb-2">
-                <span className="px-2 py-0.5 rounded bg-bone/5 border border-bone/10">06</span>
+                <span className="px-2 py-0.5 rounded bg-bone/5 border border-bone/10">12</span>
                 <span>Visual Dossier</span>
               </div>
               <h2 className="font-display text-3xl md:text-5xl font-semibold tracking-tightest">In Motion & Interfaces</h2>
@@ -512,7 +673,7 @@ export default function ProjectCaseStudy({ params }: { params: { slug: string } 
           <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-bone/10 pb-6 mb-12">
             <div>
               <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-mute mb-2">
-                <span className="px-2 py-0.5 rounded bg-bone/5 border border-bone/10">07</span>
+                <span className="px-2 py-0.5 rounded bg-bone/5 border border-bone/10">13</span>
                 <span>Dossier Stream</span>
               </div>
               <h2 className="font-display text-3xl md:text-5xl font-semibold tracking-tightest">Real-time Gameplay Footage</h2>
@@ -552,7 +713,7 @@ export default function ProjectCaseStudy({ params }: { params: { slug: string } 
           <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-bone/10 pb-6 mb-12">
             <div>
               <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-mute mb-2">
-                <span className="px-2 py-0.5 rounded bg-bone/5 border border-bone/10">08</span>
+                <span className="px-2 py-0.5 rounded bg-bone/5 border border-bone/10">14</span>
                 <span>Retrospective</span>
               </div>
               <h2 className="font-display text-3xl md:text-5xl font-semibold tracking-tightest">Project Outcomes & Impact</h2>

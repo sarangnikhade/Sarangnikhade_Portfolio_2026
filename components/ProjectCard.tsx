@@ -44,6 +44,11 @@ export default function ProjectCard({ project, index }: { project: Project; inde
         <div className="hidden md:block md:col-span-2 text-sm text-mute">
           <p className="text-bone/90">{project.role}</p>
           <p className="mt-1 text-xs">{project.tools.join(" · ")}</p>
+          {project.outcomeLine && (
+            <p className="mt-1.5 text-xs text-accent/90 font-mono leading-snug">
+              → {project.outcomeLine}
+            </p>
+          )}
         </div>
 
         <div className="hidden md:flex md:col-span-1 text-xs">
@@ -62,6 +67,11 @@ export default function ProjectCard({ project, index }: { project: Project; inde
         <span className="font-mono">{project.year}</span>
         <span>· {project.role}</span>
       </div>
+      {project.outcomeLine && (
+        <p className="md:hidden mt-2 ml-[16.66%] text-xs text-accent/90 font-mono leading-snug">
+          → {project.outcomeLine}
+        </p>
+      )}
     </Wrapper>
   );
 }

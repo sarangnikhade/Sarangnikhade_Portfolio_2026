@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   title: "Sarang Nikhade — UX/UI & Game Designer",
   description:
     "Portfolio of Sarang Nikhade — senior UI/UX and game designer working across mobile, web, VR, and interactive systems.",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
   openGraph: {
     title: "Sarang Nikhade — UX/UI & Game Designer",
     description: "Designing immersive, intuitive experiences across screens, worlds, and play.",

@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { profile, projects, experience, skills } from "@/lib/data";
+import { profile, projects, experience, capabilityGroups } from "@/lib/data";
+import { Download } from "lucide-react";
 import SectionReveal from "@/components/SectionReveal";
 import Marquee from "@/components/Marquee";
 import ProjectCard from "@/components/ProjectCard";
@@ -145,6 +146,14 @@ export default function Home() {
                 Selected work
                 <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
               </Link>
+              <a
+                href={profile.cvHref}
+                download
+                className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border hairline bg-accent/10 backdrop-blur-sm text-accent hover:bg-accent hover:text-ink transition-colors"
+              >
+                <Download className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
+                Download CV
+              </a>
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full border hairline bg-ink/30 backdrop-blur-sm text-bone/95 hover:text-bone hover:border-bone/50 transition-colors"
@@ -166,26 +175,45 @@ export default function Home() {
         </div>
         <SectionReveal className="md:col-span-9">
           <h2 className="font-display text-4xl md:text-6xl leading-[1.05] tracking-tightest">
-            Eight years between pixels and play. I design interfaces that feel inevitable
-            <span className="font-cursive"> — and systems people actually want to come back to.</span>
+            Senior UX/UI designer, 8 years across mobile, web, and product.
+            <span className="font-cursive"> MA in Game Development,</span> now applying interaction and systems design to game UI and VR.
           </h2>
           <p className="mt-10 max-w-2xl text-bone/70 leading-relaxed">{profile.about}</p>
+          <div className="mt-10">
+            <a
+              href={profile.cvHref}
+              download
+              className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border hairline bg-bone/5 hover:bg-bone hover:text-ink text-bone/90 transition-colors"
+            >
+              <Download className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
+              <span className="text-sm font-medium">Download CV</span>
+            </a>
+          </div>
         </SectionReveal>
       </section>
 
-      {/* SKILLS */}
+      {/* CAPABILITIES */}
       <section className="border-y hairline">
         <div className="mx-auto max-w-[1400px] px-6 md:px-10 py-20 grid md:grid-cols-12 gap-10">
           <div className="md:col-span-3">
             <p className="font-mono text-xs uppercase tracking-widest text-mute">02 — Capabilities</p>
           </div>
-          <div className="md:col-span-9 flex flex-wrap gap-2">
-            {skills.map((s) => (
-              <LiquidGlass key={s} rounded="rounded-full" intensity="soft">
-                <span className="block px-4 py-2 text-sm text-bone/90 hover:text-accent transition-colors">
-                  {s}
-                </span>
-              </LiquidGlass>
+          <div className="md:col-span-9 space-y-10">
+            {capabilityGroups.map((group) => (
+              <div key={group.label} className="grid grid-cols-12 gap-6 items-start">
+                <h3 className="col-span-12 sm:col-span-3 font-mono text-[11px] uppercase tracking-widest text-accent pt-2">
+                  {group.label}
+                </h3>
+                <div className="col-span-12 sm:col-span-9 flex flex-wrap gap-2">
+                  {group.items.map((s) => (
+                    <LiquidGlass key={s} rounded="rounded-full" intensity="soft">
+                      <span className="block px-4 py-2 text-sm text-bone/90 hover:text-accent transition-colors">
+                        {s}
+                      </span>
+                    </LiquidGlass>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>

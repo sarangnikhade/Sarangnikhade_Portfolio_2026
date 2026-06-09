@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import LiquidGlass from "@/components/LiquidGlass";
 import ThemeToggle from "@/components/ThemeToggle";
+import { profile } from "@/lib/data";
+import { Download } from "lucide-react";
 
 const links = [
   { href: "/", label: "Home" },
@@ -36,9 +39,15 @@ export default function Nav() {
             href="/"
             className="group flex items-center gap-2.5 font-sans font-semibold text-[15px] uppercase tracking-widest text-bone transition-transform duration-300 active:scale-95"
           >
-            <span className="relative flex items-center justify-center w-7 h-7 rounded-lg border hairline bg-bone/5 overflow-hidden group-hover:border-accent/40 group-hover:bg-accent/5 transition-all">
-              <span className="font-display lowercase text-base text-accent group-hover:scale-110 transition-transform duration-500">s</span>
-              <span className="absolute inset-0 bg-gradient-to-tr from-accent/0 via-accent/5 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <span className="relative flex items-center justify-center w-8 h-8 rounded-lg overflow-hidden group-hover:ring-1 group-hover:ring-accent/40 transition-all duration-300">
+              <Image
+                src="/sn-nav-icon.svg"
+                alt="SN monogram"
+                width={32}
+                height={32}
+                className="w-full h-full group-hover:scale-110 transition-transform duration-500"
+                priority
+              />
             </span>
             <span className="group-hover:text-accent transition-colors duration-300">Sarang</span>
           </Link>
@@ -57,6 +66,15 @@ export default function Nav() {
                 </Link>
               );
             })}
+            <a
+              href={profile.cvHref}
+              download
+              className="ml-1 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border hairline text-bone/85 hover:text-accent hover:border-accent/40 transition-colors"
+              aria-label="Download CV"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline text-xs font-mono uppercase tracking-widest">CV</span>
+            </a>
             <div className="ml-2 pl-3 border-l hairline">
               <ThemeToggle />
             </div>
