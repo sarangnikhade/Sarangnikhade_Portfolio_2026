@@ -6,8 +6,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import LiquidGlass from "@/components/LiquidGlass";
 import ThemeToggle from "@/components/ThemeToggle";
-import { profile } from "@/lib/data";
-import { Download } from "lucide-react";
 
 const links = [
   { href: "/", label: "Home" },
@@ -66,15 +64,6 @@ export default function Nav() {
                 </Link>
               );
             })}
-            <a
-              href={profile.cvHref}
-              download
-              className="ml-1 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border hairline text-bone/85 hover:text-accent hover:border-accent/40 transition-colors"
-              aria-label="Download CV"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline text-xs font-mono uppercase tracking-widest">CV</span>
-            </a>
             <div className="ml-2 pl-3 border-l hairline">
               <ThemeToggle />
             </div>
