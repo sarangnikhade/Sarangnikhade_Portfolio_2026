@@ -74,7 +74,7 @@ export const projects: Project[] = [
     tools: ["Figma", "Design System", "Prototyping"],
     href: "/projects/synnefo-isp",
     image: "https://static.wixstatic.com/media/e4d30e_f9b18c43ee684cca8a422a8f98d08cf2~mv2.png/v1/fill/w_400,h_400,al_c,q_88,enc_avif,quality_auto/Hand%20and%20iPhone%2016%20Pro.png",
-    outcomeLine: "Every core task ≤ 3 taps from home",
+    outcomeLine: undefined,
     case: {
       cover:
         "https://static.wixstatic.com/media/e4d30e_f9b18c43ee684cca8a422a8f98d08cf2~mv2.png/v1/fill/w_1400,h_780,al_c,q_90,enc_avif,quality_auto/Hand%20and%20iPhone%2016%20Pro.png",
@@ -128,7 +128,7 @@ export const projects: Project[] = [
     tools: ["Figma", "User Research", "Motion"],
     href: "/projects/facepe-payment",
     image: "https://static.wixstatic.com/media/e4d30e_5f891200e6574edbbae7b12e9f9f726c~mv2.png/v1/crop/x_270,y_0,w_960,h_960/fill/w_400,h_400,al_c,q_88,enc_avif,quality_auto/Hand%20and%20iPhone%2016%20Pro_1.png",
-    outcomeLine: "Sub-3s auth · consent pattern adopted as team standard",
+    outcomeLine: undefined,
     case: {
       cover:
         "https://static.wixstatic.com/media/e4d30e_5f891200e6574edbbae7b12e9f9f726c~mv2.png/v1/fill/w_1400,h_780,al_c,q_90,enc_avif,quality_auto/Hand%20and%20iPhone%2016%20Pro_1.png",
@@ -202,7 +202,7 @@ export const projects: Project[] = [
     tools: ["Figma", "AI UX", "Prototyping"],
     href: "/projects/skliq",
     image: "https://static.wixstatic.com/media/e4d30e_23944eefa0264a33919b9de53c3d1950~mv2.png/v1/crop/x_270,y_0,w_960,h_960/fill/w_400,h_400,al_c,q_88,enc_avif,quality_auto/Hand%20and%20iPhone%2016%20Pro.png",
-    outcomeLine: "Unified chat + controls — zero context-switching",
+    outcomeLine: undefined,
     case: {
       cover:
         "https://static.wixstatic.com/media/e4d30e_23944eefa0264a33919b9de53c3d1950~mv2.png/v1/fill/w_1400,h_780,al_c,q_90,enc_avif,quality_auto/Hand%20and%20iPhone%2016%20Pro.png",
@@ -257,7 +257,7 @@ export const projects: Project[] = [
     tools: ["Unity 6", "Netcode", "Meta Quest 3", "Figma"],
     href: "/projects/wings-of-freedom",
     image: "https://static.wixstatic.com/media/e4d30e_bb2df752579c44af8eb3a15ef0b7b10d~mv2.png/v1/fill/w_286,h_335,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/B1.png",
-    outcomeLine: "Real-time VR↔PC crossplay · playtested & balanced",
+    outcomeLine: undefined,
     case: {
       cover:
         "https://static.wixstatic.com/media/e4d30e_f818458c0a9e4ed8bfbe2eb8677d2ce6~mv2.png/v1/fill/w_1200,h_700,al_c,q_90,enc_avif,quality_auto/Screenshot%202025-01-06%20220533.png",
@@ -324,7 +324,7 @@ export const projects: Project[] = [
     tools: ["Unreal Engine 5", "GitHub", "Trello", "Miro"],
     href: "/projects/eco-rescuers",
     image: "https://static.wixstatic.com/media/e4d30e_6556a025fc2444839f4539962920542f~mv2.png/v1/crop/x_75,y_0,w_874,h_1024/fill/w_286,h_335,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/file.png",
-    outcomeLine: "4-player co-op · mapped to 4 UN SDGs",
+    outcomeLine: undefined,
     case: {
       cover:
         "https://static.wixstatic.com/media/e4d30e_96ea7a5703f84df5ae84409177113927~mv2.png/v1/fill/w_1200,h_700,al_c,q_90,enc_avif,quality_auto/file.png",
@@ -386,7 +386,7 @@ export const projects: Project[] = [
     tools: ["Unity 6", "Netcode", "Figma", "Photoshop", "Cinemachine"],
     href: "/projects/shattered-sky",
     image: "https://static.wixstatic.com/media/e4d30e_3c700ee61a4841409eb24bfb662a490e~mv2.jpg/v1/crop/x_7,y_0,w_535,h_627/fill/w_286,h_335,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/file.jpg",
-    outcomeLine: "5 worlds · 3 endings · asymmetric co-op",
+    outcomeLine: undefined,
     case: {
       cover:
         "https://static.wixstatic.com/media/e4d30e_4f6a9723c747419e9ef313d8ed353b8a~mv2.png/v1/fill/w_1200,h_700,al_c,q_90,enc_avif,quality_auto/file.png",
@@ -453,7 +453,7 @@ export const projects: Project[] = [
     tools: ["Unity", "C#", "Mobile"],
     href: "/projects/snow-mania",
     image: "https://static.wixstatic.com/media/e4d30e_20f456c9fe734ba4b1629a07515dc9b2~mv2.png/v1/crop/x_538,y_0,w_750,h_879/fill/w_286,h_335,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/file.png",
-    outcomeLine: "One-button control · 30–90s session loop",
+    outcomeLine: undefined,
     case: {
       cover:
         "https://static.wixstatic.com/media/e4d30e_20f456c9fe734ba4b1629a07515dc9b2~mv2.png/v1/fill/w_1200,h_700,al_c,q_90,enc_avif,quality_auto/file.png",
@@ -498,7 +498,7 @@ export const projects: Project[] = [
     tools: ["Unity 6", "Game Jam", "Rapid Prototyping"],
     href: "/projects/timetrick",
     image: "https://static.wixstatic.com/media/e4d30e_c04f5c913c4540078b4a6d9a9d83ccf1~mv2.png/v1/fill/w_286,h_335,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/file.png",
-    outcomeLine: "Shipped in 7 days · published on itch.io",
+    outcomeLine: undefined,
     case: {
       cover:
         "https://static.wixstatic.com/media/e4d30e_c04f5c913c4540078b4a6d9a9d83ccf1~mv2.png/v1/fill/w_1200,h_700,al_c,q_90,enc_avif,quality_auto/file.png",
@@ -544,9 +544,10 @@ export const projects: Project[] = [
 ];
 
 export const experience = [
-  { period: "2023 — Present", role: "Senior UI/UX Designer", note: "Product design across SaaS, fintech, and AI surfaces." },
-  { period: "2017 — 2022", role: "Sr. Consultant", note: "Multi-client design consulting spanning mobile, web, and games." },
-  { period: "2015 — 2017", role: "Graphics Designer", note: "Brand, motion, and multimedia foundations." },
+  { period: "2023 — Sep 2023", role: "Senior UI/UX Designer", note: "Led product design across SaaS, fintech, and AI surfaces. Owned end-to-end design for customer-facing portals, established design-system tokens and component libraries, and facilitated cross-functional workshops aligning engineering, product, and stakeholders." },
+  { period: "2017 — 2022", role: "Sr. Consultant", note: "Multi-client design consulting spanning mobile, web, and games. Delivered UX audits, wireframes, and high-fidelity prototypes for startups and enterprises. Mentored junior designers and introduced usability-testing practices across teams." },
+  { period: "2015 — 2017", role: "Graphics Designer", note: "Built foundational skills in brand identity, motion graphics, and multimedia production. Created visual assets for print, digital campaigns, and interactive presentations across diverse industry verticals." },
+  { period: "2024 — 2025", role: "MA Game Development", note: "Kingston University, London — specialised in game design, VR interaction, level design, and multiplayer systems. Shipped multiple titles across Unity and Unreal Engine as part of collaborative studio projects." },
 ];
 
 export const education = [
@@ -557,7 +558,7 @@ export const education = [
 export const capabilities = {
   core: ["Product Design", "UI/UX", "Design Systems", "Prototyping"],
   specialism: ["Game UI", "VR / Spatial UX", "Motion"],
-  methods: ["User Research", "Wireframing", "Figma", "Unity", "Adobe CC"],
+  methods: ["User Research", "Usability Testing", "Heuristic Analysis", "A/B Testing", "Wireframing", "Figma", "Unity"],
 } as const;
 
 export const capabilityGroups: { label: string; items: readonly string[] }[] = [

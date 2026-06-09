@@ -174,21 +174,11 @@ export default function Home() {
           <p className="font-mono text-xs uppercase tracking-widest text-mute">01 — About</p>
         </div>
         <SectionReveal className="md:col-span-9">
-          <h2 className="font-display text-4xl md:text-6xl leading-[1.05] tracking-tightest">
+          <h2 className="font-display text-3xl md:text-5xl leading-[1.05] tracking-tightest">
             Senior UX/UI designer, 8 years across mobile, web, and product.
             <span className="font-cursive"> MA in Game Development,</span> now applying interaction and systems design to game UI and VR.
           </h2>
           <p className="mt-10 max-w-2xl text-bone/70 leading-relaxed">{profile.about}</p>
-          <div className="mt-10">
-            <a
-              href={profile.cvHref}
-              download
-              className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border hairline bg-bone/5 hover:bg-bone hover:text-ink text-bone/90 transition-colors"
-            >
-              <Download className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
-              <span className="text-sm font-medium">Download CV</span>
-            </a>
-          </div>
         </SectionReveal>
       </section>
 
