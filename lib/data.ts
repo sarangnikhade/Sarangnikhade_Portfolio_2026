@@ -4,7 +4,7 @@ export const profile = {
   tagline: "Designing immersive, intuitive experiences across screens, worlds, and play.",
   about:
     "Senior UX/UI designer, 8 years across mobile, web, and product. Recently completed an MA in Game Development, now applying interaction and systems design to game UI and VR. Figma to Unity.",
-  cvHref: "/sarang-nikhade-cv.pdf",
+  cvHref: "/Sarang_Nikhade_CV.pdf",
   email: "sarang.nikhade@outlook.com",
   phone: "+44 7586 505256",
   location: "United Kingdom",
